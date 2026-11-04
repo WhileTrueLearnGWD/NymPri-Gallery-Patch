@@ -6,7 +6,9 @@ Tested on 0.80j with the Combined Patch A to E and Patch 0.80a applied. It touch
 
 ## Install (Windows)
 
-1. Download this repo (Code > Download ZIP) and extract it anywhere (or directly into the game folder).
+> **Do not just drag and drop the files into the game: the Gallery only appears after you run `install.bat`** (it registers the plugin and the map). Drag and drop first is fine, as long as you then run `install.bat`.
+
+1. Download the release zip (Releases > `NymPri-Gallery-Patch-v1.zip`) and extract it anywhere (or directly into the game folder).
 2. Double-click **`install.bat`**. It finds the game folder (the one with `Game.exe` and `www`), or asks for it.
 3. Start the game: a **Gallery** command appears on the title screen.
 

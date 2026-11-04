@@ -42,6 +42,17 @@ if ($Uninstall) {
   return
 }
 
+# 0. make sure this really is Nymphomania Priestess, before writing anything
+$sys = [IO.File]::ReadAllText((Join-Path $game "www\data\System.json"), $utf8)
+$title = [regex]::Match($sys, '"gameTitle"\s*:\s*"([^"]*)"').Groups[1].Value
+if ($title -notmatch 'Nymphomania Priestess') { throw "This is not Nymphomania Priestess (game title: '$title'). Nothing was changed." }
+if ($title -notmatch '0\.80') { Write-Host "WARNING: tested on alpha 0.80j only; your game is '$title'. Some scenes may not work." -ForegroundColor Yellow }
+$pj = [IO.File]::ReadAllText($pluginsJs, $utf8)
+foreach ($p in @("KNS_Gallery", "KNS_EventCall", "KNS_CsvReader")) {
+  if ($pj -notmatch ('"name":"' + $p + '"')) { throw "Plugin $p not found in plugins.js (unexpected game version). Nothing was changed." }
+}
+if (-not (Test-Path -LiteralPath (Join-Path $game "www\csv\sheet.csv"))) { throw "www\csv\sheet.csv not found (unexpected game version). Nothing was changed." }
+
 # 1. backups of the two files we modify
 New-Item -ItemType Directory -Force -Path $bak | Out-Null
 foreach ($f in @($pluginsJs, $mapInfos)) {
