@@ -50,8 +50,13 @@ foreach ($f in @($pluginsJs, $mapInfos)) {
 }
 
 # 2. copy the new files
-Copy-Item -LiteralPath (Join-Path $here "www\js\plugins\KNS_GalerieRoom.js") -Destination $pluginDst -Force
-Copy-Item -LiteralPath (Join-Path $here "www\data\Map434.json") -Destination $mapDst -Force
+# (skipped when the files were already dragged into the game folder: source = destination)
+foreach ($pair in @(@("www\js\plugins\KNS_GalerieRoom.js", $pluginDst), @("www\data\Map434.json", $mapDst))) {
+  $src = Join-Path $here $pair[0]
+  if ((Resolve-Path -LiteralPath $src).Path -ne (Resolve-Path -LiteralPath $pair[1] -ErrorAction SilentlyContinue).Path) {
+    Copy-Item -LiteralPath $src -Destination $pair[1] -Force
+  }
+}
 
 # 3. register the plugin right after KNS_Gallery (idempotent)
 $t = [IO.File]::ReadAllText($pluginsJs, $utf8)
