@@ -21,6 +21,27 @@ It is safe to run twice. Manual install: copy the two files from `www/` into the
 
 Run **`uninstall.bat`** (removes the line, the map entry and the two files).
 
+## Debug commands
+
+Added by the gallery (work in the Gallery room and in every scene it launches, no special mode needed):
+
+| Key / menu | Effect |
+|---|---|
+| **F7** (or Settings NPC > *Debug: tile coordinates*) | Draws  on every visible tile (yellow when x and y are multiples of 5) plus a HUD: map id, player x,y + direction, tile under the mouse, party ids. Use it to read the coordinates to report. Direction: 2 down, 4 left, 6 right, 8 up. |
+| **F6** | Lists the pictures on screen (id, file, x/y, scale, opacity) and v40 / v23 / v33 / v90 / switch 5, for diagnosing a broken scene. |
+
+Standard RPG Maker debug tools of the game itself need the **test mode**: start the game with **** (or the  shortcut, i.e.  with the argument ). Then:
+
+| Key | Effect |
+|---|---|
+| **F9** | Debug menu: Enter toggles a switch; left/right change a variable by 1, PageUp/PageDown by 10. |
+| **F8** | Developer console. |
+| **Ctrl** (held) | Walk through walls. |
+
+## Review file
+
+ is the review workbook (one sheet per NPC: conditions, hero position, team, and blue columns to fill: OK/KO, corrected position, corrected team, comment). The same lists are in the GitHub Issues labelled *review*.
+
 ## Notes
 
 - Requires map id 434 to be free (the installer refuses otherwise) and the `KNS_*` plugins of the base game (`KNS_EventCall`, `KNS_Gallery`).
